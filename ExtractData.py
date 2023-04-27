@@ -1,6 +1,9 @@
 import sqlite3
+import employeeStruct as emp
 
-def extractData(userMailID,userName,userPhone, userCoupons,userBalance ):
+employeeObj = emp.Employee("some@3ds.com", "simbi", "0000", "0","0" )
+
+def extractData(userMailID):
     # Connect to the database
     conn = sqlite3.connect('FoodCoupon.db')
 
@@ -16,17 +19,20 @@ def extractData(userMailID,userName,userPhone, userCoupons,userBalance ):
     # Iterate over the rows and print the employee name and salary
     for row in rows:
         emailId = row[1]
+        employeeObj.userMailID = row[1]
         if(userMailID == emailId):
             name = row[0]
-            userName = row[0]
+            employeeObj.userName = row[0]
             phoneNo = row[2]
-            userPhone = row[2]
+            employeeObj.userPhone = row[2]
             couponsGiven = row[3]
-            userCoupons = row[3]
+            employeeObj.userCoupons = row[3]
             balanceRemaining = row[4]
-            userBalance = row[4]
+            employeeObj.userBalance = row[4]
             print(f" Employee Name: {name} \n Emaid ID: {emailId}\n Phone No. : {phoneNo}\n Coupons Given : {couponsGiven}\n Balance Remaining : {balanceRemaining}\n")
 
     # Close the cursor and database connection
     c.close()
     conn.close()
+
+    return employeeObj
