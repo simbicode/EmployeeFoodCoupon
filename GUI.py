@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter import ttk
 import ExtractData as ext
 import employeeStruct as emp
+import InsertData as intData
 
 # creating a new tkinter window
 master = tk.Tk()
@@ -28,18 +29,25 @@ userBalance = 0
 
 employeeObj = emp.Employee("some@3ds.com", "simbi", "0000", "0","0" )
 
-def display():
+def displayEmployeeDetails():
 	print("Getting Data")
 	emailGet = emailSearch.get()
 	employeeObj =  ext.extractData(emailGet)
-	print ("Name : ", userName, "Phone : ", userPhone,"Coupons : " ,userCoupons,"Balance : ", userBalance)
+	print ("Name : ",  userName, "Phone : ", userPhone,"Coupons : " ,userCoupons,"Balance : ", userBalance)
 	displayNameLabel.config(text=employeeObj.userName)
 	displayBalanceLabel.config(text=employeeObj.userPhone)
 	displayCouponsLabel.config(text=employeeObj.userCoupons)
 	displayUserIdLabel.config(text=employeeObj.userBalance)
 
 
-
+def makeEnteryIntoDataBase():
+    employeeObj.userName = nameEntry.get()
+    employeeObj.userMailID = emailEntry.get()
+    employeeObj.userBalance = balanceEntry.get()
+    employeeObj.userPhone = phoneEntry.get()
+    employeeObj.userCoupons = couponEntry.get()
+    intData.insertData(employeeObj)
+    	
 #=====================Group box=====================
 dataEntryBox = ttk.LabelFrame(master, text='Data Entry')
 dataEntryBox.grid(column=0, row=0, padx=20, pady=20)
@@ -82,7 +90,7 @@ phoneEntry.grid(row=4, column=1)
 couponEntry.grid(row=6, column=1)
 balanceEntry.grid(row=8, column=1)
 
-button1 = tk.Button(dataEntryBox, text="Enter", bg="green", command=display, font=(fontOfLabel, sizeOfLabel))
+button1 = tk.Button(dataEntryBox, text="Enter", bg="green", command=makeEnteryIntoDataBase, font=(fontOfLabel, sizeOfLabel))
 button1.grid(row=11, column=1)
 
 #==========================DATA SEARCH COLUMN===================================
@@ -117,7 +125,7 @@ numSearch = tk.Entry(dataSearchBox,width = entryBoxWidth)
 emailSearch.grid(row=0, column=5)
 numSearch.grid(row=2, column=5)
 
-button1 = tk.Button(dataSearchBox, text="Search", bg="green", command=display, font=(fontOfLabel, sizeOfLabel))
+button1 = tk.Button(dataSearchBox, text="Search", bg="green", command=displayEmployeeDetails, font=(fontOfLabel, sizeOfLabel))
 button1.grid(row=4, column=5)
 
 
