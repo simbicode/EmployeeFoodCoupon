@@ -12,6 +12,6 @@ def insertData(Employee):
     c.execute("INSERT INTO foodCoupon (name, emaidID, phoneNo, couponsGiven, balanceRemaining) VALUES (?, ?, ?, ?, ?)", (Employee.userName, Employee.userMailID, Employee.userPhone, Employee.userCoupons, Employee.userBalance))
     print("Congratulations! New Entry Made")
     # Save the changes
-    conn.commit()
+    conn.commit() 
     # Close the connection
     conn.close()
