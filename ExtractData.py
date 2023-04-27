@@ -3,7 +3,7 @@ import employeeStruct as emp
 
 employeeObj = emp.Employee("some@3ds.com", "simbi", "0000", "0","0" )
 
-def extractData(userMailID):
+def extractData(userMailOrPhone):
     # Connect to the database
     conn = sqlite3.connect('FoodCoupon.db')
 
@@ -19,10 +19,11 @@ def extractData(userMailID):
     # Iterate over the rows and print the employee name and salary
     for row in rows:
         emailId = row[1]
-        employeeObj.userMailID = row[1]
-        if(userMailID == emailId):
+        phoneNo = row[2]
+        if(userMailOrPhone == emailId or  userMailOrPhone == phoneNo):
             name = row[0]
             employeeObj.userName = row[0]
+            employeeObj.userMailID = row[1]
             phoneNo = row[2]
             employeeObj.userPhone = row[2]
             couponsGiven = row[3]

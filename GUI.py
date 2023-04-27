@@ -31,13 +31,19 @@ employeeObj = emp.Employee("some@3ds.com", "simbi", "0000", "0","0" )
 
 def displayEmployeeDetails():
 	print("Getting Data")
-	emailGet = emailSearch.get()
-	employeeObj =  ext.extractData(emailGet)
+	if selected_value.get() == "email":
+		emailGet = emailSearch.get()
+		employeeObj =  ext.extractData(emailGet)
+	elif selected_value.get() == "phone":
+		phoneGet = int(phoneSearch.get())
+		employeeObj =  ext.extractData(phoneGet)
+
 	print ("Name : ",  userName, "Phone : ", userPhone,"Coupons : " ,userCoupons,"Balance : ", userBalance)
 	displayNameLabel.config(text=employeeObj.userName)
 	displayBalanceLabel.config(text=employeeObj.userPhone)
 	displayCouponsLabel.config(text=employeeObj.userCoupons)
 	displayUserIdLabel.config(text=employeeObj.userBalance)
+        
 
 
 def makeEnteryIntoDataBase():
@@ -101,13 +107,16 @@ dataSearchBox.grid(column=3, row=0, padx=20, pady=20)
 
 #Create radio buttons
 selected_value = tk.StringVar()
+selected_value.set("1")
 
 # Create three Radiobuttons with different values and labels
-radio_button1 = tk.Radiobutton(dataSearchBox, variable=selected_value, value="1")
+radio_button1 = tk.Radiobutton(dataSearchBox, variable=selected_value, value="email")
 radio_button1.grid(row=0, column=3)
 
-radio_button2 = tk.Radiobutton(dataSearchBox, variable=selected_value, value="2")
+radio_button2 = tk.Radiobutton(dataSearchBox, variable=selected_value, value="phone")
 radio_button2.grid(row=2, column=3)
+
+
 
 
 # labels for subject codes
@@ -119,11 +128,11 @@ tk.Label(dataSearchBox, text="", anchor = 'w', font=(fontOfLabel, sizeOfLabel)).
 
 # taking entries of name, reg, roll number respectively
 emailSearch = tk.Entry(dataSearchBox,width = entryBoxWidth)
-numSearch = tk.Entry(dataSearchBox,width = entryBoxWidth)
+phoneSearch = tk.Entry(dataSearchBox,width = entryBoxWidth)
 
 # organizing them in the grid
 emailSearch.grid(row=0, column=5)
-numSearch.grid(row=2, column=5)
+phoneSearch.grid(row=2, column=5)
 
 button1 = tk.Button(dataSearchBox, text="Search", bg="green", command=displayEmployeeDetails, font=(fontOfLabel, sizeOfLabel))
 button1.grid(row=4, column=5)
