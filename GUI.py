@@ -40,9 +40,10 @@ def displayEmployeeDetails():
 
 	print ("Name : ",  userName, "Phone : ", userPhone,"Coupons : " ,userCoupons,"Balance : ", userBalance)
 	displayNameLabel.config(text=employeeObj.userName)
+	displayUserIdLabel.config(text=employeeObj.userMailID)
 	displayBalanceLabel.config(text=employeeObj.userPhone)
 	displayCouponsLabel.config(text=employeeObj.userCoupons)
-	displayUserIdLabel.config(text=employeeObj.userBalance)
+	displayBalanceLabel.config(text=employeeObj.userBalance)
         
 
 

@@ -31,6 +31,7 @@ def extractData(userMailOrPhone):
             balanceRemaining = row[4]
             employeeObj.userBalance = row[4]
             print(f" Employee Name: {name} \n Emaid ID: {emailId}\n Phone No. : {phoneNo}\n Coupons Given : {couponsGiven}\n Balance Remaining : {balanceRemaining}\n")
+            break
 
     # Close the cursor and database connection
     c.close()
